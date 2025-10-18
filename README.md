@@ -38,65 +38,17 @@ A powerful ⚡️ Command Line Interface (CLI) tool designed to streamline the s
 
 ## 🚀 Getting Started
 
-Follow these steps to set up and use `create-tsxpress` locally to scaffold your new project.
-
-### Installation
-
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/teajhaney/create-expts.git
-    ```
-
-2.  **Navigate to the Project Directory**:
-    ```bash
-    cd create-expts
-    ```
-
-3.  **Install Dependencies**:
-    ```bash
-    npm install
-    # or yarn install
-    # or pnpm install
-    ```
-
 ### Usage
 
-Once `create-tsxpress` is installed, you can use it to create a new Express.js and TypeScript project.
+To scaffold a new Express + TypeScript project, simply run:
 
-1.  **Run the CLI Tool**:
-    To use the CLI directly, execute it via `npx` or by running the local development command:
+```bash
+npx create-tsxpress <app-name>
+```
 
-    ```bash
-    # Option 1: Using npx (recommended for fresh projects)
-    npx create-tsxpress my-new-api
+Replace `<app-name>` with your desired project folder name.
 
-    # Option 2: Running from local development (if you've cloned this repo)
-    npm run dev my-new-api
-    ```
-    Replace `my-new-api` with your desired project directory name.
-
-2.  **Follow the Prompts**:
-    The CLI will guide you through a series of prompts to configure your new project.
-
-3.  **Navigate to Your New Project**:
-    After the scaffolding is complete, change into your newly created project directory:
-
-    ```bash
-    cd my-new-api
-    ```
-
-4.  **Install Dependencies for the New Project**:
-    ```bash
-    npm install
-    # or yarn install
-    # or pnpm install
-    ```
-
-5.  **Start Your New Project in Development Mode**:
-    ```bash
-    npm run dev
-    ```
-    Your new Express.js API server will start, typically on port `5000` (configurable via `.env`).
+This command will generate a complete Express.js + TypeScript setup with best practices, dependencies, and development scripts ready to use.
 
 ---
 
