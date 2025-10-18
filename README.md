@@ -56,7 +56,7 @@ This command will generate a complete Express.js + TypeScript setup with best pr
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. We welcome contributions to `create-tsxpress`!
 
-- ✨ Fork the repository on GitHub.
+- ✨ Fork the repository on GitHub: [github.com/teajhaney/create-tsxpress](https://github.com/teajhaney/create-tsxpress)
 - 🌿 Create your feature branch (`git checkout -b feature/AmazingFeature`).
 - 📝 Commit your changes (`git commit -m 'Add some AmazingFeature'`).
 - 🚀 Push to the branch (`git push origin feature/AmazingFeature`).
