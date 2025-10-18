@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 
+
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { existsSync, mkdirSync, cpSync, writeFileSync, readFileSync } from 'fs';
+import fs, {
+  existsSync,
+  mkdirSync,
+  cpSync,
+  writeFileSync,
+  readFileSync,
+} from 'fs';
 import prompts from 'prompts';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -21,10 +28,15 @@ async function main() {
     const response = await prompts({
       type: 'text',
       name: 'projectName',
-      message: 'What is your project name?',
+      message: 'What is your project name? (use . for current folder)',
       initial: 'my-express-app',
-      validate: (value) => {
+      validate: value => {
         if (!value) return 'Project name is required';
+
+        // Allow current directory indicators
+        if (value === '.' || value === './') return true;
+
+        // Otherwise enforce normal name pattern
         if (!/^[a-z0-9-_]+$/.test(value)) {
           return 'Project name can only contain lowercase letters, numbers, hyphens, and underscores';
         }
@@ -43,7 +55,13 @@ async function main() {
   const projectPath = join(process.cwd(), projectName);
 
   // Check if directory exists
-  if (existsSync(projectPath)) {
+  // Resolve the absolute target directory
+  const targetDir = join(process.cwd(), projectName);
+
+  // If projectName is "." or "./", we allow it (current dir)
+  const isCurrentDir = projectName === '.' || projectName === './';
+
+  if (existsSync(targetDir) && !isCurrentDir) {
     console.log(chalk.red(`\n❌ Directory "${projectName}" already exists!`));
     process.exit(1);
   }
@@ -93,17 +111,20 @@ async function main() {
     spinner.succeed(chalk.green('Project created successfully!'));
 
     // Install dependencies
-    const installSpinner = ora(`Installing dependencies with ${packageManager}...`).start();
+    const installSpinner = ora(
+      `Installing dependencies with ${packageManager}...`
+    ).start();
 
     await new Promise((resolve, reject) => {
-      const installCmd = packageManager === 'yarn' ? 'yarn' : `${packageManager} install`;
+      const installCmd =
+        packageManager === 'yarn' ? 'yarn' : `${packageManager} install`;
       const child = spawn(installCmd, {
         cwd: projectPath,
         shell: true,
         stdio: 'pipe',
       });
 
-      child.on('close', (code) => {
+      child.on('close', code => {
         if (code === 0) {
           resolve();
         } else {
@@ -118,10 +139,17 @@ async function main() {
     console.log(chalk.bold.green('\n✨ All set! Your project is ready.\n'));
     console.log(chalk.cyan('Next steps:\n'));
     console.log(chalk.white(`  cd ${projectName}`));
-    console.log(chalk.white(`  ${packageManager === 'npm' ? 'npm run' : packageManager} dev`));
-    console.log(chalk.dim('\n  Edit .env to configure your environment variables'));
-    console.log(chalk.dim('  Visit http://localhost:3000 once the server starts\n'));
-
+    console.log(
+      chalk.white(
+        `  ${packageManager === 'npm' ? 'npm run' : packageManager} dev`
+      )
+    );
+    console.log(
+      chalk.dim('\n  Edit .env to configure your environment variables')
+    );
+    console.log(
+      chalk.dim('  Visit http://localhost:3000 once the server starts\n')
+    );
   } catch (error) {
     spinner.fail(chalk.red('Failed to create project'));
     console.error(chalk.red(error.message));
@@ -129,7 +157,7 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+main().catch(error => {
   console.error(chalk.red('An error occurred:'), error);
   process.exit(1);
 });

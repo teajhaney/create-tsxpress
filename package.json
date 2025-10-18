@@ -1,11 +1,11 @@
 {
-  "name": "create-expts",
+  "name": "create-tsxpress",
   "version": "1.0.0",
   "description": "CLI to scaffold Express + TypeScript API projects",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "create-expts": "./bin/cli.js"
+    "create-tsxpress": "./bin/cli.js"
   },
   "scripts": {
     "build": "tsc",
