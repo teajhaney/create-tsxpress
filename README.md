@@ -70,10 +70,10 @@ This project is licensed under the MIT License. See the `package.json` file for 
 
 **Yusuf Tijani Olatunde (섭이)**
 
-- **Email**: `teajhaney@gmail.com`
-- **LinkedIn**: `https://www.linkedin.com/in/yusuf-tijani-605b04167/`
-- **Twitter**: `https://x.com/teajhaney`
-- **GitHub**: `https://github.com/teajhaney`
+- **Email**: [teajhaney@gmail.com](mailto:teajhaney@gmail.com)
+- **LinkedIn**: [linkedin.com/in/yusuf-tijani-605b04167](https://www.linkedin.com/in/yusuf-tijani-605b04167/)
+- **Twitter**: [x.com/teajhaney](https://x.com/teajhaney)
+- **GitHub**: [github.com/teajhaney](https://github.com/teajhaney)
 
 _(The template created by this CLI was originally authored by Yusuf Tijani Olatunde (섭이).)_
 
