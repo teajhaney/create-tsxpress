@@ -4,10 +4,10 @@ import express, { Application } from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import cors from 'cors';
-import { PORT } from '@/common/config';
-import errorHandler from '@/middleware/error.hnadler';
-import { notFoundHandler } from '@/middleware/not.found.handler';
-import logger from '@/common/utils/logger';
+import { PORT } from './common/config';
+import errorHandler from './middleware/error.hnadler';
+import { notFoundHandler } from './middleware/not.found.handler';
+import logger from './common/utils/logger';
 
 const app: Application = express();
 

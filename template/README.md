@@ -1,9 +1,11 @@
 # 🚀 Express.js TypeScript API Boilerplate
 
 ## Overview
+
 This project provides a robust, production-ready starter template for building high-performance APIs with **Node.js**, **Express.js**, and **TypeScript**. It incorporates essential security, logging, and error handling best practices to accelerate development of scalable backend services.
 
 ## Features
+
 - **TypeScript**: Ensures type safety and improves code maintainability.
 - **Express.js**: Fast, unopinionated, minimalist web framework for Node.js.
 - **Helmet**: Secures Express apps by setting various HTTP headers.
@@ -14,13 +16,16 @@ This project provides a robust, production-ready starter template for building h
 - **Async Handler**: Simplifies asynchronous route handling, automatically catching and forwarding errors.
 - **Centralized Configuration**: Manages environment variables for different deployment stages.
 - **Nodemon**: Automatically restarts the server during development for a smoother workflow.
+- **Deployment Ready**: Optimized for production deployment with proper build scripts.
 
 ## Getting Started
 
 To get this API boilerplate up and running on your local machine, follow these steps:
 
 ### Installation
+
 1.  **Clone the Repository**:
+
     ```bash
     git clone https://github.com/teajhaney/express-typescript-template.git
     cd express-typescript-template
@@ -35,40 +40,53 @@ To get this API boilerplate up and running on your local machine, follow these s
     ```
 
 ### Environment Variables
-Before running the application, you need to set up your environment variables. Create a `.env` file in the root of the project and add the following:
+
+Before running the application, you need to set up your environment variables. Copy the example file and configure:
+
+```bash
+cp env.example .env
+```
+
+Edit the `.env` file with your configuration:
 
 ```env
 PORT=3000
 NODE_ENV=development
 ```
 
--   `PORT`: The port number on which the Express server will listen.
--   `NODE_ENV`: The environment (e.g., `development`, `production`). This affects logging levels.
+- `PORT`: The port number on which the Express server will listen.
+- `NODE_ENV`: The environment (e.g., `development`, `production`). This affects logging levels.
 
 ### Usage
 
 1.  **Development Mode**:
     To run the server in development mode with `nodemon`, which automatically restarts the server on file changes:
+
     ```bash
     npm run dev
     # or
     yarn dev
     ```
+
     The server will be accessible at `http://localhost:3000` (or your specified `PORT`).
 
 2.  **Build and Start Production**:
     First, compile the TypeScript code:
+
     ```bash
     npm run build
     # or
     yarn build
     ```
+
     Then, start the server using the compiled JavaScript:
+
     ```bash
     npm start
     # or
-    yarn start
+    npm run start:prod  # with NODE_ENV=production
     ```
+
     The production server will be accessible at `http://localhost:3000` (or your specified `PORT`).
 
 3.  **Clean Build Artifacts**:
@@ -79,81 +97,150 @@ NODE_ENV=development
     yarn clean
     ```
 
+## Development vs Production
+
+### Development
+
+- Runs TypeScript directly using `ts-node`
+- Hot reload with `nodemon`
+- No compilation step required
+- Uses relative imports for better compatibility
+
+### Production
+
+- Compiles TypeScript to JavaScript in `dist/` folder
+- Runs compiled JavaScript with `node`
+- Optimized for deployment platforms
+- No TypeScript dependencies in production
+
+## Key Improvements
+
+- ✅ Removed `@/` import aliases (deployment compatibility)
+- ✅ Fixed TypeScript configuration for proper compilation
+- ✅ Removed `tsconfig-paths` dependency
+- ✅ Added proper build scripts
+- ✅ Optimized for both development and production
+
 ## API Documentation
 
 This project provides a foundational boilerplate for an API. It sets up middleware for security, logging, error handling, and rate limiting but does not include application-specific endpoints by default. You can extend it by adding your routes and controllers in the `src/routes` and `src/controllers` directories (which you would create).
 
 ### Base URL
+
 The base URL will depend on your environment:
--   **Development**: `http://localhost:PORT` (e.g., `http://localhost:3000`)
--   **Production**: `Your_Deployed_Domain`
+
+- **Development**: `http://localhost:PORT` (e.g., `http://localhost:3000`)
+- **Production**: `Your_Deployed_Domain`
 
 ### Endpoints
+
 While there are no custom application routes defined in this boilerplate, the following system-level behaviors are handled:
 
 #### `ANY /<undefined-route>`
+
 This applies to any route that does not match a defined endpoint.
 **Request**:
+
 ```
 No specific payload.
 ```
+
 **Response**:
+
 ```json
 {
   "success": false,
   "message": "Route /api/v1/nonexistent not found"
 }
 ```
+
 **Errors**:
--   `404 Not Found`: Occurs when a requested route does not exist.
+
+- `404 Not Found`: Occurs when a requested route does not exist.
 
 #### `ANY /<any-route>` (Rate Limited)
+
 Applies to any endpoint when the rate limit is exceeded.
 **Request**:
+
 ```
 No specific payload.
 ```
+
 **Response**:
+
 ```json
 {
   "success": false,
   "message": "Too many requests"
 }
 ```
+
 **Errors**:
--   `429 Too Many Requests`: Triggered when the client exceeds the allowed request limit (50 requests per minute by default).
+
+- `429 Too Many Requests`: Triggered when the client exceeds the allowed request limit (50 requests per minute by default).
 
 #### `ANY /<any-route>` (Internal Server Error)
+
 Applies to any endpoint when an unhandled server-side error occurs.
 **Request**:
+
 ```
 No specific payload.
 ```
+
 **Response**:
+
 ```json
 {
   "success": false,
   "message": "Internal server error"
 }
 ```
+
 **Errors**:
--   `500 Internal Server Error`: Generic server error.
--   Custom errors defined using `AppError` will return their specific `statusCode` and `message`.
+
+- `500 Internal Server Error`: Generic server error.
+- Custom errors defined using `AppError` will return their specific `statusCode` and `message`.
+
+## Deployment
+
+This template is optimized for deployment to platforms like Railway, Heroku, Vercel, or any Node.js hosting service.
+
+### Railway/Heroku Deployment
+
+1. The build process is automatic
+2. Uses `npm run build` to compile TypeScript
+3. Uses `npm start` to run the production server
+
+### Manual Deployment
+
+1. Build the application:
+
+   ```bash
+   npm run build
+   ```
+
+2. Start the production server:
+   ```bash
+   npm run start:prod
+   ```
 
 ## Technologies Used
 
-| Technology         | Description                                     | Link                                                            |
-| :----------------- | :---------------------------------------------- | :-------------------------------------------------------------- |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) | Typed superset of JavaScript that compiles to plain JavaScript. | [TypeScript](https://www.typescriptlang.org/)                   |
-| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white) | JavaScript runtime built on Chrome's V8 JavaScript engine.      | [Node.js](https://nodejs.org/en/)                               |
-| ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white) | Fast, unopinionated, minimalist web framework for Node.js.      | [Express.js](https://expressjs.com/)                            |
-| ![Winston](https://img.shields.io/badge/Winston-orange?style=for-the-badge&logo=winston&logoColor=white) | A versatile logging library for Node.js.                        | [Winston](https://github.com/winstonjs/winston)                 |
-| ![Helmet](https://img.shields.io/badge/Helmet-white?style=for-the-badge&logo=helmet&logoColor=black) | Secures Express apps by setting various HTTP headers.           | [Helmet](https://helmetjs.github.io/)                           |
-| ![CORS](https://img.shields.io/badge/CORS-gray?style=for-the-badge) | Middleware for enabling Cross-Origin Resource Sharing.          | [CORS](https://github.com/expressjs/cors)                       |
-| ![dotenv](https://img.shields.io/badge/dotenv-black?style=for-the-badge&logo=dotenv&logoColor=white) | Loads environment variables from a `.env` file.                 | [dotenv](https://github.com/motdotla/dotenv)                    |
-| ![Nodemon](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=nodemon&logoColor=white) | Utility that monitors for changes and automatically restarts.   | [Nodemon](https://nodemon.io/)                                  |
+| Technology                                                                                                        | Description                                                     | Link                                            |
+| :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :---------------------------------------------- |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) | Typed superset of JavaScript that compiles to plain JavaScript. | [TypeScript](https://www.typescriptlang.org/)   |
+| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)          | JavaScript runtime built on Chrome's V8 JavaScript engine.      | [Node.js](https://nodejs.org/en/)               |
+| ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)    | Fast, unopinionated, minimalist web framework for Node.js.      | [Express.js](https://expressjs.com/)            |
+| ![Winston](https://img.shields.io/badge/Winston-orange?style=for-the-badge&logo=winston&logoColor=white)          | A versatile logging library for Node.js.                        | [Winston](https://github.com/winstonjs/winston) |
+| ![Helmet](https://img.shields.io/badge/Helmet-white?style=for-the-badge&logo=helmet&logoColor=black)              | Secures Express apps by setting various HTTP headers.           | [Helmet](https://helmetjs.github.io/)           |
+| ![CORS](https://img.shields.io/badge/CORS-gray?style=for-the-badge)                                               | Middleware for enabling Cross-Origin Resource Sharing.          | [CORS](https://github.com/expressjs/cors)       |
+| ![dotenv](https://img.shields.io/badge/dotenv-black?style=for-the-badge&logo=dotenv&logoColor=white)              | Loads environment variables from a `.env` file.                 | [dotenv](https://github.com/motdotla/dotenv)    |
+| ![Nodemon](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=nodemon&logoColor=white)          | Utility that monitors for changes and automatically restarts.   | [Nodemon](https://nodemon.io/)                  |
 
 ## Contributing
+
 We welcome contributions to enhance this boilerplate! If you'd like to contribute, please follow these guidelines:
 
 1.  🍴 **Fork the Repository**: Start by forking this repository to your GitHub account.
@@ -178,14 +265,16 @@ We welcome contributions to enhance this boilerplate! If you'd like to contribut
 7.  🤝 **Open a Pull Request**: Submit a pull request to the `main` branch of this repository. Provide a detailed description of your changes.
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) file for details.
 
 ## Author Info
+
 Developed with passion by Yusuf Tijani Olatunde.
 
--   **LinkedIn**: [Your_LinkedIn_Profile]
--   **Twitter**: [Your_Twitter_Handle]
--   **Portfolio**: [Your_Portfolio_Website]
+- **LinkedIn**: [Your_LinkedIn_Profile]
+- **Twitter**: [Your_Twitter_Handle]
+- **Portfolio**: [Your_Portfolio_Website]
 
 ---
 
