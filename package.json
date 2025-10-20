@@ -19,11 +19,11 @@
     "scaffold",
     "create"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Yusuf Tijani Olatunde (섭이)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/teajhaney/express-typescript-template"
+    "url": "https://github.com/teajhaney/create-tsxpress"
   },
   "dependencies": {
     "chalk": "^5.6.2",

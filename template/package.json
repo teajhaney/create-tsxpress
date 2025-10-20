@@ -15,12 +15,8 @@
     "starter",
     "boilerplate"
   ],
-  "author": "Yusuf Tijani Olatunde (섭이)",
+  "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/teajhaney/express-typescript-template"
-  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
