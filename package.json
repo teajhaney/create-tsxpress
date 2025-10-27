@@ -17,7 +17,13 @@
     "typescript",
     "cli",
     "scaffold",
-    "create"
+    "create",
+    "typescript",
+    "scaffolding",
+    "generator",
+    "boilerplate",
+    "tsxpress",
+    "express-typescript-starter"
   ],
   "author": "Yusuf Tijani Olatunde (섭이)",
   "license": "MIT",
